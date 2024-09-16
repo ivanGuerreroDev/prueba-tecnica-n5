@@ -1,16 +1,29 @@
 using Microsoft.EntityFrameworkCore;
-public class ApplicationDbContext : DbContext
+using System;
+using webapi.Models;
+
+public class DbContext : IDisposable
 {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
+    private readonly string _connectionString;
+
+    public DbContext(string connectionString)
+    {
+        _connectionString = connectionString;
+    }
+
+    public DbContext()
+    {
+    }
 
     public DbSet<Permission> Permissions { get; set; }
-    public DbSet<PermissionType> PermissionTypes { get; set; }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    public void SaveChanges()
     {
-        modelBuilder.Entity<PermissionType>().HasData(
-            new PermissionType { Id = 1, Description = "Vacation" },
-            new PermissionType { Id = 2, Description = "Sick Leave" }
-        );
+        // Implement your database save logic here
+    }
+
+    public void Dispose()
+    {
+        // Implement your database dispose logic here
     }
 }

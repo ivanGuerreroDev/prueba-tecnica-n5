@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
+    <RootNamespace>prueba_tecnica_n5</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,14 +14,16 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-
-    <!-- MediatR para CQRS -->
-    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
-
+    <PackageReference Include="Confluent.Kafka" Version="1.7.0" />
+    
+    <PackageReference Include="Moq" Version="4.16.1" />
+    <PackageReference Include="xunit" Version="2.4.1" />
     <!-- Elasticsearch -->
     <PackageReference Include="Elasticsearch.Net" Version="7.17.5" />
-    <PackageReference Include="Nest" Version="7.17.5" />
-
+    <PackageReference Include="NEST" Version="7.17.5" />
+    <!-- MediatR para CQRS -->
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
+      
     <!-- xUnit para testing -->
     <PackageReference Include="xunit" Version="2.4.2" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
@@ -28,12 +31,23 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.7.2" />
-
-    <!-- Otras dependencias -->
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="IKafkaProducer.cs" />
+    <Compile Update="KafkaProducer.cs" />
+    <Compile Update="IRepository.cs" />
+    <Compile Update="Repository.cs" />
+    <Compile Update="IUnitOfWork.cs" />
+    <Compile Update="UnitOfWork.cs" />
+    <Compile Update="ICommand.cs" />
+    <Compile Update="Command.cs" />
+    <Compile Update="IQuery.cs" />
+    <Compile Update="Query.cs" />
+    <Compile Update="IRequestPermissionService.cs" />
+    <Compile Update="RequestPermissionService.cs" />
+    <Compile Update="Startup.cs" />
+    <Compile Update="Program.cs" />
   </ItemGroup>
 
 </Project>

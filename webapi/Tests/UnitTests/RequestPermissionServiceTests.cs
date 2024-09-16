@@ -1,8 +1,5 @@
 using Moq;
-using webapi.Kafka;
 using webapi.Models;
-using webapi.Services;
-using webapi.UnitOfWork;
 using Xunit;
 
 public class RequestPermissionServiceTests

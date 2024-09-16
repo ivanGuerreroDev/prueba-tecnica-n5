@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using webapi.Models;
 
 public interface IRepository<T> where T : class
 {
@@ -7,4 +8,5 @@ public interface IRepository<T> where T : class
     void Add(T entity);
     void Update(T entity);
     void Delete(T entity);
+    void Add(Permission permission);
 }

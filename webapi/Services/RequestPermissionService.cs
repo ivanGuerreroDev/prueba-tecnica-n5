@@ -1,3 +1,5 @@
+using System;
+using webapi.Models;
 public class RequestPermissionService : IRequestPermissionService
 {
     private readonly IKafkaProducer _kafkaProducer;

@@ -1,6 +1,7 @@
 using Nest;
 using System;
 using System.Threading.Tasks;
+using webapi.Models;
 public class PermissionElasticSearchService
 {
     private readonly IElasticClient _elasticClient;
@@ -10,7 +11,7 @@ public class PermissionElasticSearchService
         _elasticClient = elasticClient;
     }
 
-    public async Task IndexPermissionAsync(PermissionDocument document)
+    public async Task IndexPermissionAsync(Permission document)
     {
         var response = await _elasticClient.IndexDocumentAsync(document);
         if (!response.IsValid)

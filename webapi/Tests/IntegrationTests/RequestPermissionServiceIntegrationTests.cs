@@ -1,8 +1,6 @@
 
 using Confluent.Kafka;
 using webapi.Models;
-using webapi.Services;
-using webapi.UnitOfWork;
 using Xunit;
 
 public class RequestPermissionServiceIntegrationTests
@@ -11,9 +9,8 @@ public class RequestPermissionServiceIntegrationTests
     public void RequestPermission_ServiceCalled_KafkaMessageSent()
     {
         // Arrange
-        var unitOfWork = new UnitOfWork(new DbContext());
-        var kafkaProducer = new KafkaProducer(new Producer<string, string>(new ProducerConfig { BootstrapServers = "localhost:9092" }));
-
+        var unitOfWork = new UnitOfWork(context: new DbContext());
+        var kafkaProducer = new KafkaProducer(new ProducerBuilder<string, string>(new ProducerConfig { BootstrapServers = "localhost:9092" }).Build());
         var permission = new Permission { EmployeeName = "John", EmployeeLastname = "Doe" };
 
         var requestPermissionService = new RequestPermissionService(kafkaProducer, unitOfWork);

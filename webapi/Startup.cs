@@ -1,34 +1,42 @@
-
-using Autofac;
+using Elasticsearch.Net;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using webapi.Models;
-using webapi.Repositories;
-using webapi.Services;
-using webapi.UnitOfWork;
 
-public void ConfigureServices(IServiceCollection services)
+namespace prueba_tecnica_n5
 {
-    services.AddControllers();
-
-    var builder = WebApplication.CreateBuilder(services);
-
-    builder.RegisterType<UnitOfWork>().As<IUnitOfWork>();
-    builder.RegisterType<Repository<Permission>>().As<IRepository<Permission>>();
-    builder.RegisterType<RequestPermissionCommand>().As<ICommand>();
-    builder.RegisterType<GetPermissionsQuery>().As<IQuery<IEnumerable<Permission>>>();
-    builder.RegisterType<RequestPermissionService>().As<IRequestPermissionService>();
-
-    services.AddAutofac();
-}
-
-public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-{
-    app.UseRouting();
-    app.UseEndpoints(endpoints =>
+    public class Startup
     {
-        endpoints.MapControllers();
-    });
+
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
+
+        public IConfiguration Configuration { get; }
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddControllers();
+
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
+            services.AddTransient<IRepository<Permission>, Repository<Permission>>();
+            services.AddTransient<IKafkaProducer, KafkaProducer>();
+            services.AddTransient<IRequestPermissionService, RequestPermissionService>();
+            services.AddElasticsearch(Configuration);
+        }
+
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            app.UseRouting();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+
+            var kafkaProducer = app.ApplicationServices.GetService<IKafkaProducer>();
+            kafkaProducer.SendMessage("permissions_topic", "Hello, Kafka!");
+        }
+    }
 }

@@ -15,6 +15,9 @@ public class KafkaProducer : IKafkaProducer
         _producer = producer;
     }
 
+
+    public IProducer<object, object> Producer { get; }
+
     public void SendMessage(string topic, object message)
     {
         var jsonMessage = JsonConvert.SerializeObject(message);
