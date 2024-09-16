@@ -1,31 +1,19 @@
 using Microsoft.AspNetCore.Mvc;
-using MediatR;
-using System.Threading.Tasks;
-using webapi.CQRS.Queries;
+using webapi.Models;
 
-[ApiController]
-[Route("api/[controller]")]
 public class PermissionsController : ControllerBase
 {
-    private readonly IMediator _mediator;
+    private readonly IRequestPermissionService _requestPermissionService;
 
-    public PermissionsController(IMediator mediator)
+    public PermissionsController(IRequestPermissionService requestPermissionService)
     {
-        _mediator = mediator;
+        _requestPermissionService = requestPermissionService;
     }
 
-    [HttpPost("request")]
-    public async Task<IActionResult> RequestPermission([FromBody] RequestPermissionCommand command)
+    [HttpPost]
+    public IActionResult RequestPermission(Permission permission)
     {
-        await _mediator.Send(command);
+        _requestPermissionService.RequestPermission(permission);
         return Ok();
     }
-
-    [HttpGet]
-    public async Task<IActionResult> GetPermissions()
-    {
-        var result = await _mediator.Send(new GetPermissionsQuery());
-        return Ok(result);
-    }
-
 }
