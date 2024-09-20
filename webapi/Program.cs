@@ -20,6 +20,12 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    dbContext.Database.Migrate();  // This will apply any pending migrations
+}
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

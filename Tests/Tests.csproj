@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <!-- Referencia a los proyectos que se están probando -->
-    <ProjectReference Include="..\WebApi.csproj" />
+    <ProjectReference Include="..\WebApi\WebApi.csproj" />
   </ItemGroup>
 
   <ItemGroup>

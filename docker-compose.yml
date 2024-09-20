@@ -9,6 +9,8 @@ services:
       - "1433:1433"
     volumes:
       - sqlserverdata:/var/opt/mssql
+    networks:
+      - app-network
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.15.0
@@ -17,11 +19,15 @@ services:
     ports:
       - "9200:9200"
       - "9300:9300"
+    networks:
+      - app-network
 
   zookeeper:
     image: wurstmeister/zookeeper:3.4.6
     ports:
       - "2181:2181"
+    networks:
+      - app-network
 
   kafka:
     image: wurstmeister/kafka:latest
@@ -38,6 +44,8 @@ services:
       - zookeeper
     volumes:
       - kafka-data:/var/lib/kafka/data
+    networks:
+      - app-network
 
   init-kafka:
     image: wurstmeister/kafka:latest
@@ -53,6 +61,8 @@ services:
         kafka-topics.sh --create --topic permissions --bootstrap-server kafka:9093 --partitions 1 --replication-factor 1
         echo "Topics created."
     tty: true
+    networks:
+      - app-network
 
   webapi:
     build:
@@ -64,6 +74,11 @@ services:
       - sqlserver
       - elasticsearch
       - kafka
+    networks:
+      - app-network
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DefaultConnection=Server=sqlserver;Database=PermissionsDB;User Id=sa;Password=YourPassword123!;
 
   frontend:
     build:
@@ -73,7 +88,12 @@ services:
       - "3000:3000"
     depends_on:
       - webapi
+    networks:
+      - app-network
 
 volumes:
   sqlserverdata:
   kafka-data:
+networks:
+  app-network:
+    driver: bridge
