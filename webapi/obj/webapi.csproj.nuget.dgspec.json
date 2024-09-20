@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\rogue\\Documentos\\proyectos\\Pruebas Tecnicas\\n5\\webapi\\webapi.csproj": {}
+    "C:\\Users\\rogue\\Documentos\\proyectos\\Pruebas Tecnicas\\n5\\WebApi\\WebApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\rogue\\Documentos\\proyectos\\Pruebas Tecnicas\\n5\\webapi\\webapi.csproj": {
+    "C:\\Users\\rogue\\Documentos\\proyectos\\Pruebas Tecnicas\\n5\\WebApi\\WebApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\rogue\\Documentos\\proyectos\\Pruebas Tecnicas\\n5\\webapi\\webapi.csproj",
-        "projectName": "webapi",
-        "projectPath": "C:\\Users\\rogue\\Documentos\\proyectos\\Pruebas Tecnicas\\n5\\webapi\\webapi.csproj",
+        "projectUniqueName": "C:\\Users\\rogue\\Documentos\\proyectos\\Pruebas Tecnicas\\n5\\WebApi\\WebApi.csproj",
+        "projectName": "WebApi",
+        "projectPath": "C:\\Users\\rogue\\Documentos\\proyectos\\Pruebas Tecnicas\\n5\\WebApi\\WebApi.csproj",
         "packagesPath": "C:\\Users\\rogue\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\rogue\\Documentos\\proyectos\\Pruebas Tecnicas\\n5\\webapi\\obj\\",
         "projectStyle": "PackageReference",
@@ -22,15 +22,15 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net7.0"
+          "net6.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net7.0": {
-            "targetAlias": "net7.0",
+          "net6.0": {
+            "targetAlias": "net6.0",
             "projectReferences": {}
           }
         },
@@ -46,42 +46,24 @@
         }
       },
       "frameworks": {
-        "net7.0": {
-          "targetAlias": "net7.0",
+        "net6.0": {
+          "targetAlias": "net6.0",
           "dependencies": {
             "Confluent.Kafka": {
               "target": "Package",
-              "version": "[1.7.0, )"
+              "version": "[1.8.2, )"
             },
             "Elasticsearch.Net": {
               "target": "Package",
-              "version": "[7.17.5, )"
+              "version": "[7.15.0, )"
             },
-            "MediatR": {
+            "Microsoft.EntityFrameworkCore.Design": {
               "target": "Package",
-              "version": "[12.4.1, )"
-            },
-            "MediatR.Extensions.Microsoft.DependencyInjection": {
-              "target": "Package",
-              "version": "[11.1.0, )"
-            },
-            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
-              "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[6.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[7.0.0, )"
-            },
-            "Microsoft.EntityFrameworkCore.Tools": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
-              "target": "Package",
-              "version": "[7.0.0, )"
-            },
-            "Microsoft.NET.Test.Sdk": {
-              "target": "Package",
-              "version": "[17.7.2, )"
+              "version": "[6.0.0, )"
             },
             "Moq": {
               "target": "Package",
@@ -89,15 +71,17 @@
             },
             "NEST": {
               "target": "Package",
-              "version": "[7.17.5, )"
+              "version": "[7.15.0, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.2.3, )"
             },
             "xunit": {
               "target": "Package",
-              "version": "[2.4.1, )"
+              "version": "[2.4.2, )"
             },
             "xunit.runner.visualstudio": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
               "target": "Package",
               "version": "[2.4.5, )"
             }
@@ -113,24 +97,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[7.0.20, 7.0.20]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[7.0.20, 7.0.20]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[7.0.20, 7.0.20]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[7.0.20, 7.0.20]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"

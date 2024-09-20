@@ -1,7 +1,0 @@
-C:\Users\rogue\Documentos\proyectos\Pruebas Tecnicas\n5\webapi\obj\Debug\net7.0\webapi.csproj.AssemblyReference.cache
-C:\Users\rogue\Documentos\proyectos\Pruebas Tecnicas\n5\webapi\obj\Debug\net7.0\webapi.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\rogue\Documentos\proyectos\Pruebas Tecnicas\n5\webapi\obj\Debug\net7.0\webapi.AssemblyInfoInputs.cache
-C:\Users\rogue\Documentos\proyectos\Pruebas Tecnicas\n5\webapi\obj\Debug\net7.0\webapi.AssemblyInfo.cs
-C:\Users\rogue\Documentos\proyectos\Pruebas Tecnicas\n5\webapi\obj\Debug\net7.0\webapi.csproj.CoreCompileInputs.cache
-C:\Users\rogue\Documentos\proyectos\Pruebas Tecnicas\n5\webapi\obj\Debug\net7.0\webapi.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\rogue\Documentos\proyectos\Pruebas Tecnicas\n5\webapi\obj\Debug\net7.0\webapi.sourcelink.json

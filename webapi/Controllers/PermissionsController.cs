@@ -1,66 +1,35 @@
-using Elasticsearch.Net;
+using WebApi.Services;
 using Microsoft.AspNetCore.Mvc;
-using Nest;
-using webapi.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
-namespace webapi.Controllers
+namespace WebApi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
     public class PermissionsController : ControllerBase
     {
-        private readonly IElasticClient _elasticClient;
-        private readonly IRequestPermissionService _requestPermissionService;
+        private readonly RequestPermissionHandler _requestPermissionHandler;
+        private readonly GetPermissionsHandler _getPermissionsHandler;
 
-        public PermissionsController(IElasticClient elasticClient, IRequestPermissionService requestPermissionService)
+        public PermissionsController(RequestPermissionHandler requestPermissionHandler, GetPermissionsHandler getPermissionsHandler)
         {
-            _elasticClient = elasticClient;
-            _requestPermissionService = requestPermissionService;
+            _requestPermissionHandler = requestPermissionHandler;
+            _getPermissionsHandler = getPermissionsHandler;
         }
 
-        [HttpPost]
-        public IActionResult RequestPermission(Permission permission)
+        [HttpPost("request")]
+        public async Task<IActionResult> RequestPermission([FromBody] RequestPermissionCommand command)
         {
-            // Almacenar el permiso en Elasticsearch
-            var indexResponse = _elasticClient.IndexDocument(permission);
-
-            if (!indexResponse.IsValid)
-            {
-                return StatusCode(500, "Error al almacenar el permiso en Elasticsearch");
-            }
-
-            _requestPermissionService.RequestPermission(permission);
+            await _requestPermissionHandler.Handle(command);
             return Ok();
         }
 
-        [HttpGet]
-        public IActionResult GetPermissions()
+        [HttpGet("permissions")]
+        public async Task<IActionResult> GetPermissions([FromQuery] GetPermissionsQuery query)
         {
-            // Recuperar todos los permisos de Elasticsearch
-            var searchResponse = _elasticClient.Search<Permission>(s => s
-                .Index("permissions")
-                .Query(q => q.MatchAll())
-            );
-
-            var permissions = searchResponse.Documents;
-
+            var permissions = await _getPermissionsHandler.Handle(query);
             return Ok(permissions);
-        }
-
-        [HttpGet("{id}")]
-        public IActionResult GetPermission(string id)
-        {
-            // Recuperar un permiso específico de Elasticsearch
-            var getResponse = _elasticClient.Get<Permission>(id);
-
-            if (!getResponse.Found)
-            {
-                return NotFound();
-            }
-
-            var permission = getResponse.Source;
-
-            return Ok(permission);
         }
     }
 }
