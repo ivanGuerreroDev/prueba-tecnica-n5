@@ -7,6 +7,15 @@ using WebApi.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);
+// add cors *
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(
+        builder =>
+        {
+            builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+        });
+});
 
 // Add services to the container.
 builder.Services.AddControllers();
@@ -14,6 +23,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<RequestPermissionHandler>();
 builder.Services.AddScoped<GetPermissionsHandler>();
+builder.Services.AddScoped <ModifyPermissionHandler>();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IElasticSearchService, ElasticSearchService>();
@@ -39,10 +49,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseCors();
 app.UseHttpsRedirection();
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();

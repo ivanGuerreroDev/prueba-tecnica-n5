@@ -11,6 +11,7 @@ namespace WebApi.Controllers
     {
         private readonly RequestPermissionHandler _requestPermissionHandler;
         private readonly GetPermissionsHandler _getPermissionsHandler;
+        private readonly ModifyPermissionHandler _modifyPermissionHandler;
 
         public PermissionsController(RequestPermissionHandler requestPermissionHandler, GetPermissionsHandler getPermissionsHandler)
         {
@@ -30,6 +31,22 @@ namespace WebApi.Controllers
         {
             var permissions = await _getPermissionsHandler.Handle(query);
             return Ok(permissions);
+        }
+
+        [HttpPut("permissions/{id}")]
+        public async Task<IActionResult> ModifyPermission(int id, [FromBody] ModifyPermissionCommand command)
+        {
+            command.PermissionId = id;
+            var result = await _modifyPermissionHandler.Handle(command);
+
+            if (result.IsSuccess)
+            {
+                return Ok();
+            }
+            else
+            {
+                return BadRequest(result.ErrorMessage);
+            }
         }
     }
 }

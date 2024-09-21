@@ -25,7 +25,9 @@ namespace WebApi.Services
             {
                 UserId = command.UserId,
                 PermissionTypeId = command.PermissionTypeId,
-                DateRequested = DateTime.UtcNow
+                DateRequested = DateTime.UtcNow,
+                EmployeeName = command.EmployeeName,
+                EmployeeLastname = command.EmployeeLastname
             };
 
             await _unitOfWork.Permissions.AddPermissionAsync(permission);

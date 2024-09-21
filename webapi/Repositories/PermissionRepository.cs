@@ -32,5 +32,20 @@ namespace WebApi.Repositories
         {
             return await _context.Permissions.Include(p => p.PermissionType).ToListAsync();
         }
+
+        public async Task<Permission?> GetByIdAsync(object permissionId)
+        {
+            return await _context.Permissions.FindAsync(permissionId);
+        }
+
+        public void Update(Permission permission)
+        {
+            _context.Permissions.Update(permission);
+        }
+
+        Task IPermissionRepository.GetByIdAsync(object permissionId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
